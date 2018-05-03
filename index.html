@@ -11,7 +11,7 @@
     <title>rijn</title>
     <meta name="description" content="rijn" />
     <meta name="keywords" content="rijn" />
-    <link rel="stylesheet" type="text/css" href="style.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
 </head>
 
@@ -19,27 +19,27 @@
   <div class="top-container">
     <div class="row-container">
       <div class="menu-countainer">
-<!--         <a class="menu-item" href="http://lab.rijnx.com/">
-          <span>Laboratory</span>
-        </a> -->
-        <a class="menu-item" href="http://blog.rijnx.com/">
-          <span>Blog</span>
+        <a class="menu-item level-1" href="http://blog.rijnx.com/">
+          <span class="title">Blog</span>
+          <span class="triangle"></span>
         </a>
-        <a class="menu-item" href="https://rijn.github.io/Notes/">
-          <span>Notebook</span>
+        <a class="menu-item level-2" href="https://rijn.github.io/Notes/">
+          <span class="title">Notebook</span>
+          <span class="triangle"></span>
         </a>
-        <a class="menu-item" href="http://blog.rijnx.com/files/cv.pdf">
-          <span>CV</span>
+        <a class="menu-item level-3" href="http://blog.rijnx.com/files/cv.pdf">
+          <span class="title">CV</span>
+          <span class="triangle"></span>
         </a>
-        <a class="menu-item" href="https://github.com/rijn/">
-          <span>Github</span>
+        <a class="menu-item level-4" href="https://github.com/rijn/">
+          <span class="title">Github</span>
+          <span class="triangle"></span>
         </a>
+        <span id="lodash" class="lodash"></span>
       </div>
     </div>
   </div>
   <footer>
-    <img class="font" src="./font.gif">
-    <img class="emoji" src="./emoji.gif">
     <div class="copyright">
       <p>&copy;&nbsp;Rijn, 2018.</p>
       <p><a href="http://www.miitbeian.gov.cn/">苏ICP备15003700号</a></p>
@@ -54,6 +54,11 @@
     ga('create', 'UA-88944252-1', 'auto');
     ga('send', 'pageview');
 
+    var lodashActive = false;
+    setInterval(function () {
+      lodashActive = !lodashActive;
+      document.getElementById('lodash').className = 'lodash ' + (lodashActive ? 'active' : '');
+    }, 500);
   </script>
 </body>
 

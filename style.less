@@ -14,10 +14,6 @@
     margin: 0;
     padding: 0;
     outline: 0;
-    transition: all ease-out 0.2s;
-    -webkit-transition: all ease-out 0.2s;
-    -moz-transition: all ease-out 0.2s;
-    -o-transition: all ease-out 0.2s;
     z-index: 2;
 }
 
@@ -27,6 +23,7 @@ body {
     width: 100%;
     font-family: 'NotoSans-Regular';
     color: #3c3d3f;
+    background: #49505f;
     font-size: 12px
 }
 
@@ -53,19 +50,28 @@ a {
 }
 
 .row-container {
-    display: table;
-    margin: auto
+  display: table;
+  margin: auto;
+  @media screen and (max-width: 568px) {
+    margin: 0;
+  }
 }
 
 .menu-countainer {
-    position: relative;
-    display: inline-block;
-    height: @menu-height;
+  position: relative;
+  display: inline-block;
+  height: @menu-height;
 
-    @media screen and (max-width: 568px) {
-      overflow: hidden;
-      height: auto;
-    }
+  @media screen and (max-width: 568px) {
+    overflow: hidden;
+    height: auto;
+  }
+
+  & > * {
+    display: block;
+    position: relative;
+    float: left;
+  }
 }
 
 @margin-trans-t: 0.15s;
@@ -73,18 +79,11 @@ a {
 
 .menu-item {
 
-  height: 3px;
-  line-height: @menu-height;
-
-  display: block;
-  position: relative;
-  float: left;
-
   @media screen and (max-width: 568px) {
     float: none;
   }
 
-  margin: 0 8px;
+  margin: 0;
   padding: 0;
 
   @media screen and (max-width: 568px) {
@@ -94,56 +93,102 @@ a {
     text-align: center;
   }
 
-  // transition: padding 0.15s ease;
-  transition: padding @margin-trans-t ease,
-              margin @margin-trans-t ease,
-              height @height-trans-t @margin-trans-t+0.1 ease,
-              border-radius @margin-trans-t+@height-trans-t ease,
-              color @margin-trans-t+@height-trans-t ease;
-
-  // background: #fff;
-  background: @color_trans_a;
-
-  color: #3c3d3f;
+  display: flex;
 
   span {
-      // display: block;
-      padding: 1px 3px;
+    display: inline-block;
+    vertical-align: middle;
 
-      border-top: solid 3px @color_trans_b;
+    @media screen and (max-width: 568px) {
+      display: block;
+    }
+  }
+
+  span.title {
+    padding: 0 15px;
+    line-height: @menu-height;
+    color: #3b3e47;
+
+    transition: padding @margin-trans-t ease;
+
+    @media screen and (max-width: 568px) {
+      font-size: 2em;
+      line-height: @menu-height * 2;
+    }
+  }
+
+  span.triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12.5px 0 12.5px 13px;
+
+    @media screen and (max-width: 568px) {
+      display: none;
+    }
+  }
+
+  &.level-1 {
+    span.title {
+      background: #efb8cb;
+    }
+
+    span.triangle {
+      border-color: #f4ced9 #f4ced9 #f4ced9 #efb8cb;
+    }
+  }
+
+  &.level-2 {
+    span.title {
+      background: #f4ced9;
+    }
+
+    span.triangle {
+      border-color: #f9dae0 #f9dae0 #f9dae0 #f4ced9;
+    }
+  }
+
+  &.level-3 {
+    span.title {
+      background: #f9dae0;
+    }
+
+    span.triangle {
+      border-color: #fce9eb #fce9eb #fce9eb #f9dae0;
+    }
+  }
+
+  &.level-4 {
+    span.title {
+      background: #fce9eb;
+    }
+
+    span.triangle {
+      border-color: transparent transparent transparent #fce9eb;
+    }
   }
 
   &:hover {
-    color: #fff;
     cursor: pointer;
 
-    margin: 0 4px;
-    padding: 0 4px;
-
-    animation: shine 1.8s 0.5s ease infinite;
-
-    height: @menu-height;
-    border-radius: 2px;
-
-    span {
-      border-top: solid 3px fade(#fff, 70%);
+    span.title {
+      padding: 0 20px;
     }
   }
 
 }
 
-@keyframes shine {
-  from {
-    opacity: 1;
-    // background: fade(@color_trans_a, 100%);
+.lodash {
+  &.active {
+    border-bottom: solid 2px #fff;
   }
-  50% {
-    opacity: 0.6;
-    // background: fade(@color_trans_a, 60%);
-  }
-  to {
-    opacity: 1;
-    // background: fade(@color_trans_a, 100%);
+  height: @menu-height - 1px;
+  width: 12px;
+
+  margin-left: 12px;
+
+  @media screen and (max-width: 568px) {
+    display: none;
   }
 }
 
@@ -155,18 +200,6 @@ footer {
   right: 0;
 
   text-align: center;
-
-  & > img {
-    display: block;
-    position: relative;
-    margin: 0 auto;
-  }
-  .emoji {
-    max-width: 100px;
-  }
-  .font {
-    width: 250px;
-  }
 
   .copyright {
     font-size: 0.7rem;
